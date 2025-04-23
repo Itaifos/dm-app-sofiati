@@ -1,12 +1,14 @@
 import { StatusBar } from 'expo-status-bar';
-import AppNavigator from "./src/navigation/AppNavigator"
+import EmotionSelectionScreen from "./src/screens/EmotionSelectionScreen"
+import { SafeAreaView } from "react-native";
+
 
 export default function App() {
   return (
-    <>
+    <SafeAreaView style={{flex: 1}}>
       <StatusBar style="light" />
-      <AppNavigator />
-    </>
+      <EmotionSelectionScreen/>
+    </SafeAreaView>
   )
 }
 
