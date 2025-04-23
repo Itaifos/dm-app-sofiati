@@ -25,19 +25,19 @@ const capitalize = (text) => text.charAt(0).toUpperCase() + text.slice(1)
 
 const styles = StyleSheet.create({
   button: {
-    width: "45%",                 // Ocupa quase metade da largura do container
-    borderRadius: 16,             // Bordas arredondadas
-    padding: SPACING.large,       // Espaçamento interno generoso
-    alignItems: "center",         // Centraliza conteúdo horizontalmente
-    justifyContent: "center",     // Centraliza conteúdo verticalmente
-    marginBottom: SPACING.medium, // Espaçamento entre os botões
+    width: "45%",                 
+    borderRadius: 16,             
+    padding: SPACING.large,       
+    alignItems: "center",         
+    justifyContent: "center",     
+    marginBottom: SPACING.medium, 
   },
   icon: {
-    marginBottom: SPACING.small,  // Espaço entre o ícone e o texto
+    marginBottom: SPACING.small,  
   },
   label: {
-    fontSize: SIZES.medium,       // Tamanho do texto mediano
-    fontWeight: "500",            // Peso da fonte intermediário
+    fontSize: SIZES.medium,       
+    fontWeight: "500",            
   },
 })
 

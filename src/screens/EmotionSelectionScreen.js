@@ -7,7 +7,7 @@ import { SearchSongsButton } from "./Components/SearchSongsButton"
 
 
 const EmotionSelectionScreen = () => {
-  //isso é um reacthook
+  //reacthook
   const [selectedEmotion, setSelectedEmotion] = useState("")
 
   const backgroundColor = selectedEmotion ? COLORS[selectedEmotion].background : COLORS.black
@@ -21,30 +21,30 @@ const EmotionSelectionScreen = () => {
       <View style={styles.ButtonArea}>
         <EmotionButton
             icon={Smile}
-            label="happy"
-            selected={selectedEmotion === "happy"}
-            onPress={() => setSelectedEmotion("happy")}
+            label="feliz"
+            selected={selectedEmotion === "feliz"}
+            onPress={() => setSelectedEmotion("feliz")}
         />
 
         <EmotionButton
             icon={Frown}
-            label="sad"
-            selected={selectedEmotion === "sad"}
-            onPress={() => setSelectedEmotion("sad")}
+            label="triste"
+            selected={selectedEmotion === "triste"}
+            onPress={() => setSelectedEmotion("triste")}
         />
 
         <EmotionButton
             icon={Coffee}
-            label="relaxed"
-            selected={selectedEmotion === "relaxed"}
-            onPress={() => setSelectedEmotion("relaxed")}
+            label="relaxado"
+            selected={selectedEmotion === "relaxado"}
+            onPress={() => setSelectedEmotion("relaxado")}
         />
 
         <EmotionButton
             icon={Zap}
-            label="energetic"
-            selected={selectedEmotion === "energetic"}
-            onPress={() => setSelectedEmotion("energetic")}
+            label="animado"
+            selected={selectedEmotion === "animado"}
+            onPress={() => setSelectedEmotion("animado")}
         />
       </View>
 
