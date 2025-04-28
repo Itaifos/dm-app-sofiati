@@ -4,16 +4,23 @@ import { COLORS } from "../constants/Colors"
 import { Smile, Frown, Coffee, Zap } from "lucide-react-native"
 import { EmotionButton } from "./Components/EmotionButton"
 import { SearchSongsButton } from "./Components/SearchSongsButton"
+import { LinearGradient } from "expo-linear-gradient"
 
 
 const EmotionSelectionScreen = () => {
   //reacthook
   const [selectedEmotion, setSelectedEmotion] = useState("")
 
-  const backgroundColor = selectedEmotion ? COLORS[selectedEmotion].background : COLORS.black
+  const primaryBgColor = COLORS[selectedEmotion]?.primary || COLORS.darkGray
+  const secondaryBgColor = COLORS[selectedEmotion]?.secondary || COLORS.black
 
   return (
-    <View style={[styles.container, { backgroundColor }]}>
+    <LinearGradient 
+      style={styles.container}
+      colors={[secondaryBgColor, primaryBgColor]}
+      start={{x: 0.0, y: 0.0}}
+      end={{x: 0.0, y: 1.0}}
+    >
       <View style={styles.Title}>
         <Text style={styles.titleText}>Como você está se sentindo?</Text>
       </View>
@@ -52,7 +59,7 @@ const EmotionSelectionScreen = () => {
         <SearchSongsButton emotion={selectedEmotion} />
       </View>
       
-    </View>
+    </LinearGradient>
   )
 }
 
