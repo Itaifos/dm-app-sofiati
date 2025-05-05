@@ -5,6 +5,7 @@ import { Smile, Frown, Coffee, Zap } from "lucide-react-native"
 import { EmotionButton } from "./Components/EmotionButton"
 import { SearchSongsButton } from "./Components/SearchSongsButton"
 import { LinearGradient } from "expo-linear-gradient"
+import { GradientOverlay } from "./Components/GradientOverlay"
 
 
 const EmotionSelectionScreen = () => {
@@ -21,6 +22,8 @@ const EmotionSelectionScreen = () => {
       start={{x: 0.0, y: 0.0}}
       end={{x: 0.0, y: 1.0}}
     >
+      <GradientOverlay/>
+
       <View style={styles.Title}>
         <Text style={styles.titleText}>Como você está se sentindo?</Text>
       </View>
