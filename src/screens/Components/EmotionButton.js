@@ -2,21 +2,32 @@
 import { TouchableOpacity, Text, StyleSheet, View } from "react-native"
 import { COLORS } from "../../constants/Colors"
 import {SIZES, SPACING } from "../../constants/Themes"
+import { GradientColor } from "../Components/GradientColor"
 
 export const EmotionButton = ({ icon: Icon, label, selected, onPress }) => {
-  const emotionColors = COLORS[label]
-  const backgroundColor = selected ? COLORS.white : COLORS.darkGray
-  const textColor = selected ? emotionColors.primary : COLORS.white
-  const borderColor = selected ? emotionColors.primary : COLORS.mediumGray
+  const emotionColors = COLORS[label] 
+  const borderColor = selected ? "transparent" : COLORS.mediumGray
+  const textColor = COLORS.white
+  const backgroundColor = selected ? emotionColors.primary : COLORS.darkGray
+
 
   return (
-    <TouchableOpacity style={[styles.button, { backgroundColor, borderColor }]} onPress={onPress}>
+    <TouchableOpacity 
+      style={[styles.button, { borderColor }]} 
+      onPress={onPress}
+    >
+      
+      {selected && (
+        <GradientColor primary={emotionColors.primary} secondary={emotionColors.secondary}/>
+      )}
+      
       <View style={styles.icon}>
-        {Icon && <Icon size={32} color={textColor} />}
+          {Icon && <Icon size={32} color={textColor} />}
       </View>
       <Text style={{ color: textColor, fontWeight: "bold" }}>
-        {capitalize(label)}
+          {capitalize(label)}
       </Text>
+
     </TouchableOpacity>
   )
 }
@@ -31,6 +42,8 @@ const styles = StyleSheet.create({
     alignItems: "center",         
     justifyContent: "center",     
     marginBottom: SPACING.medium, 
+    overflow: "hidden",
+    borderWidth: 2
   },
   icon: {
     marginBottom: SPACING.small,  

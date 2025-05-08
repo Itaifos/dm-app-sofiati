@@ -8,22 +8,22 @@ export const COLORS = {
     feliz: {
       primary: "#FFD700",
       secondary: "#FFA500",
-      background: "rgba(255, 215, 0, 0.1)",
+      background: "#FFD700",
     },
     triste: {
       primary: "#4169E1",
       secondary: "#8A2BE2",
-      background: "rgba(65, 105, 225, 0.1)",
+      background: "#4169E1",
     },
     relaxado: {
       primary: "#2E8B57",
       secondary: "#20B2AA",
-      background: "rgba(46, 139, 87, 0.1)",
+      background: "#2E8B57",
     },
     animado: {
       primary: "#FF4500",
       secondary: "#FF1493",
-      background: "rgba(255, 69, 0, 0.1)",
+      background: "#FF4500",
     },
   }
   
