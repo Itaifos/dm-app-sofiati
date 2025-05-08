@@ -6,6 +6,7 @@ import { EmotionButton } from "./Components/EmotionButton"
 import { SearchSongsButton } from "./Components/SearchSongsButton"
 import { LinearGradient } from "expo-linear-gradient"
 import { GradientOverlay } from "./Components/GradientOverlay"
+import { SIZES } from "../constants/Themes"
 
 
 const EmotionSelectionScreen = () => {
@@ -20,12 +21,12 @@ const EmotionSelectionScreen = () => {
       style={styles.container}
       colors={[secondaryBgColor, primaryBgColor]}
       start={{x: 0.0, y: 0.0}}
-      end={{x: 0.0, y: 1.0}}
+      end={{x: 1.0, y: 1.0}}
     >
       <GradientOverlay/>
 
       <View style={styles.Title}>
-        <Text style={styles.titleText}>Como você está se sentindo?</Text>
+        <Text style={styles.TitleText}>Como você está se sentindo?</Text>
       </View>
 
       <View style={styles.ButtonArea}>
@@ -74,9 +75,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginVertical: 24,
   },
-  titleText: {
-    fontSize: 20,
+  TitleText: {
+    fontSize: SIZES.xxl,
     color: COLORS.white,
+    textAlign: "center"
   },
   ButtonArea: {
     flexDirection: "row",
