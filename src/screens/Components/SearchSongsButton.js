@@ -4,7 +4,6 @@ import { FONTS, SIZES, SPACING } from "../../constants/Themes"
 import { COLORS } from "../../constants/Colors"
 
 export const SearchSongsButton = ({ emotion }) => {
-  // Protege contra emoções indefinidas
   const buttonColor = COLORS[emotion]?.primary || COLORS.mediumGray
   const isDisabled = !emotion
 
@@ -14,23 +13,24 @@ export const SearchSongsButton = ({ emotion }) => {
       disabled={isDisabled}
       activeOpacity={0.7}
     >
-      <Text style={styles.buttonText}>Descobrir Músicas</Text>
+      <Text style={styles.label}>Descobrir Músicas</Text>
     </TouchableOpacity>
   )
 }
 
 const styles = StyleSheet.create({
   button: {
-    paddingVertical: SPACING.large,
+    paddingVertical: SPACING.medium,
     paddingHorizontal: SPACING.xl,
     borderRadius: 50,
     alignItems: "center",
     justifyContent: "center",
+    width: "90%"
   },
   disabled: {
     opacity: 0.5,
   },
-  buttonText: {
+  label: {
     fontSize: SIZES.large,
     fontFamily: FONTS.bold.fontFamily,
     fontWeight: FONTS.bold.fontWeight,

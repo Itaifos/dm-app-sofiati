@@ -12,7 +12,6 @@ import { SIZES } from "../constants/Themes"
 const EmotionSelectionScreen = () => {
   //reacthook
   const [selectedEmotion, setSelectedEmotion] = useState("")
-
   const primaryBgColor = COLORS[selectedEmotion]?.primary || COLORS.darkGray
   const secondaryBgColor = COLORS[selectedEmotion]?.secondary || COLORS.black
 
@@ -72,6 +71,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   Title: {
+    marginTop: 100,
     alignItems: "center",
     marginVertical: 24,
   },
