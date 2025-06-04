@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet, SafeAreaView } from "react-native"
+import { Text, View, StyleSheet } from "react-native"
 import { useState } from "react"
 import { COLORS } from "../constants/Colors"
 import { Smile, Frown, Coffee, Zap } from "lucide-react-native"
@@ -7,6 +7,8 @@ import { SearchSongsButton } from "./Components/SearchSongsButton"
 import { LinearGradient } from "expo-linear-gradient"
 import { GradientOverlay } from "./Components/GradientOverlay"
 import { SIZES } from "../constants/Themes"
+import { useNavigation } from "@react-navigation/native"
+
 
 
 const EmotionSelectionScreen = () => {
@@ -14,6 +16,8 @@ const EmotionSelectionScreen = () => {
   const [selectedEmotion, setSelectedEmotion] = useState("")
   const primaryBgColor = COLORS[selectedEmotion]?.primary || COLORS.darkGray
   const secondaryBgColor = COLORS[selectedEmotion]?.secondary || COLORS.black
+  const navigation = useNavigation()
+
 
   return (
     <LinearGradient 
@@ -59,7 +63,15 @@ const EmotionSelectionScreen = () => {
       </View>
 
       <View style={styles.ButtonNext}>
-        <SearchSongsButton emotion={selectedEmotion} />
+        <SearchSongsButton 
+          emotion={selectedEmotion}
+          onPress={() => {
+            if (selectedEmotion) {
+              navigation.navigate("RecommendationScreen", { emotion: selectedEmotion})
+            }
+          }}
+        
+        />
       </View>
       
     </LinearGradient>
