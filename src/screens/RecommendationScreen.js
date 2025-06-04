@@ -134,9 +134,8 @@ const styles = StyleSheet.create({
     color: COLORS.lightGray,
   },
   RefreshButton: {
-    // marginTop: 40,
     alignItems: "center",
-    marginBottom: 40,
+    marginBottom: 80,
   },
 })
 
