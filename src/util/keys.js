@@ -1,0 +1,6 @@
+
+// SUPABASE
+export const YOUR_REACT_NATIVE_SUPABASE_URL = 'https://qvgagnabwgxlopfzwyog.supabase.co'
+export const YOUR_REACT_NATIVE_SUPABASE_ANON_KEY = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF2Z2FnbmFid2d4bG9wZnp3eW9nIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDkwNzU4MzUsImV4cCI6MjA2NDY1MTgzNX0.tdUE0LKCgurdINVwfhryHRybeG-LChxfBCLuwcp8n2o
+
+// SPOTFY
