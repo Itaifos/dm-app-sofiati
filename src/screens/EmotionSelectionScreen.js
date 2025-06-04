@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   Title: {
-    marginTop: 100,
+    marginTop: 20,
     alignItems: "center",
     marginVertical: 24,
   },

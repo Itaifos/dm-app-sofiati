@@ -5,16 +5,21 @@ import { COLORS } from "../constants/Colors"
 import { SIZES, SPACING } from "../constants/Themes"
 import { GradientOverlay } from "../screens/Components/GradientOverlay"
 import { RefreshSongsButton } from "../screens/Components/RefreshSongsButton"
+import { useNavigation } from "@react-navigation/native"
 
 const RecommendationScreen = ({ route }) => {
   const selectedEmotion = route.params?.emotion || "feliz"
   const primaryBgColor = COLORS[selectedEmotion]?.primary || COLORS.darkGray
   const secondaryBgColor = COLORS[selectedEmotion]?.secondary || COLORS.black
 
+  const navigation = useNavigation()
+
   const recommendations = [
     { id: "1", title: "Música 1", artist: "Artista 1", albumCover: "https://via.placeholder.com/300" },
     { id: "2", title: "Música 2", artist: "Artista 2", albumCover: "https://via.placeholder.com/300" },
     { id: "3", title: "Música 3", artist: "Artista 3", albumCover: "https://via.placeholder.com/300" },
+    { id: "4", title: "Música 4", artist: "Artista 3", albumCover: "https://via.placeholder.com/300" },
+    { id: "5", title: "Música 5", artist: "Artista 3", albumCover: "https://via.placeholder.com/300" },
   ]
 
   const renderSongItem = ({ item }) => {
@@ -40,12 +45,14 @@ const RecommendationScreen = ({ route }) => {
     >
       <GradientOverlay/>
 
-      <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
-        <ArrowLeft size={24} color={COLORS.white} />
-      </TouchableOpacity>
-      
-      <View style={styles.Title}>
-        <Text style={styles.TitleText}>Músicas para {selectedEmotion}</Text>
+      <View style={styles.header}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <ArrowLeft size={24} color={COLORS.white} />
+        </TouchableOpacity>
+        
+        <View style={styles.title}>
+          <Text style={styles.titleText}>Músicas para {selectedEmotion} </Text>
+        </View>
       </View>
       
       <FlatList
@@ -54,10 +61,16 @@ const RecommendationScreen = ({ route }) => {
         keyExtractor={(item) => item.id}
         contentContainerStyle={styles.listContent}
         showsVerticalScrollIndicator={false}
+        ListEmptyComponent={<Text style={styles.emptyText}>Nenhuma música encontrada.</Text>}
       />
 
       <View style={styles.RefreshButton}>
-        <RefreshSongsButton emotion={selectedEmotion}/>
+        <RefreshSongsButton 
+          emotion={selectedEmotion}
+          Onpress={() => {
+            console.log("cheguei aqqui")
+          }}
+        />
       </View>
     
     </LinearGradient>
@@ -69,7 +82,29 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   listContent: {
-    padding: SPACING.large,
+    padding: SPACING.medium,
+  },
+  header: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: 30,
+    marginLeft:20,
+    marginBottom: 40
+  },
+  title: {
+    alignItems: "center",
+    marginLeft: 20,
+  },
+  titleText: {
+    fontSize: SIZES.large,
+    color: COLORS.white,
+    textAlign: "center",
+    fontWeight: "bold",
+    
+  },
+  listContent: {
+    paddingHorizontal: SPACING.large,
+    paddingBottom: SPACING.large,
   },
   songItem: {
     flexDirection: "row",
@@ -99,8 +134,9 @@ const styles = StyleSheet.create({
     color: COLORS.lightGray,
   },
   RefreshButton: {
-    marginTop: 40,
+    // marginTop: 40,
     alignItems: "center",
+    marginBottom: 40,
   },
 })
 

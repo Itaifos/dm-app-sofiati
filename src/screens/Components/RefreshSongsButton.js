@@ -4,17 +4,18 @@ import { RefreshCw } from "lucide-react-native"
 import { FONTS, SIZES, SPACING } from "../../constants/Themes"
 import { COLORS } from "../../constants/Colors"
 
-export const SearchSongsButton = ({ emotion }) => {
+export const RefreshSongsButton = ({ emotion, Onpress }) => {
   const emotionColors = COLORS[emotion]
-  const backgroundColor = selected ? emotionColors.primary : COLORS.darkGray
+  const backgroundColor = emotionColors  ? emotionColors.primary : COLORS.darkGray
   
   return (
     <TouchableOpacity
       style={[styles.button, { backgroundColor: backgroundColor }]}
       activeOpacity={0.7}
+      onPress={Onpress}
     >
       <RefreshCw size={20} color={COLORS.white} style={{ marginRight: 8 }} />
-      <Text style={styles.label}>Descobrir novas Músicas</Text>
+      <Text style={styles.label}>Gerar Novas Músicas</Text>
     </TouchableOpacity>
   )
 }
@@ -26,7 +27,8 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     alignItems: "center",
     justifyContent: "center",
-    width: "90%"
+    width: "90%",
+    flexDirection: "row",  
   },
   label: {
     fontSize: SIZES.large,
