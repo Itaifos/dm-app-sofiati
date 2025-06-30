@@ -5,6 +5,7 @@ import { COLORS } from "../constants/Colors"
 import { SIZES, SPACING } from "../constants/Themes"
 import { GradientOverlay } from "../screens/Components/GradientOverlay"
 import { RefreshSongsButton } from "../screens/Components/RefreshSongsButton"
+import { CreatePlaylistButton } from "../screens/Components/CreatePlaylistButton"
 import { useNavigation } from "@react-navigation/native"
 
 const RecommendationScreen = ({ route }) => {
@@ -64,13 +65,21 @@ const RecommendationScreen = ({ route }) => {
         ListEmptyComponent={<Text style={styles.emptyText}>Nenhuma música encontrada.</Text>}
       />
 
-      <View style={styles.RefreshButton}>
+      <View style={styles.ButtonArea}>
+        <CreatePlaylistButton
+          emotion={selectedEmotion}
+          Onpress={() => {
+            console.log("cheguei aqqui")
+          }}
+        />
+        
         <RefreshSongsButton 
           emotion={selectedEmotion}
           Onpress={() => {
             console.log("cheguei aqqui")
           }}
         />
+
       </View>
     
     </LinearGradient>
@@ -133,9 +142,12 @@ const styles = StyleSheet.create({
     fontSize: SIZES.small,
     color: COLORS.lightGray,
   },
-  RefreshButton: {
-    alignItems: "center",
-    marginBottom: 80,
+  ButtonArea: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "center",
+    gap: 10,
+    marginBottom: 90,
   },
 })
 
