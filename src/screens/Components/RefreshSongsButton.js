@@ -1,12 +1,12 @@
 
-import { Text, TouchableOpacity, StyleSheet } from "react-native"
+import { TouchableOpacity, StyleSheet } from "react-native"
 import { RefreshCw } from "lucide-react-native"
-import { FONTS, SIZES, SPACING } from "../../constants/Themes"
+import { SPACING } from "../../constants/Themes"
 import { COLORS } from "../../constants/Colors"
 
 export const RefreshSongsButton = ({ emotion, Onpress }) => {
   const emotionColors = COLORS[emotion]
-  const backgroundColor = emotionColors  ? emotionColors.primary : COLORS.darkGray
+  const backgroundColor = emotionColors  ? emotionColors.secondary : COLORS.darkGray
   
   return (
     <TouchableOpacity
@@ -14,8 +14,7 @@ export const RefreshSongsButton = ({ emotion, Onpress }) => {
       activeOpacity={0.7}
       onPress={Onpress}
     >
-      <RefreshCw size={20} color={COLORS.white} style={{ marginRight: 8 }} />
-      <Text style={styles.label}>Gerar Novas Músicas</Text>
+      <RefreshCw size={20} color={COLORS.white} />
     </TouchableOpacity>
   )
 }
@@ -23,17 +22,11 @@ export const RefreshSongsButton = ({ emotion, Onpress }) => {
 const styles = StyleSheet.create({
   button: {
     paddingVertical: SPACING.medium,
-    paddingHorizontal: SPACING.xl,
+    paddingHorizontal: SPACING.small,
     borderRadius: 50,
     alignItems: "center",
     justifyContent: "center",
-    width: "90%",
+    width: "25%",
     flexDirection: "row",  
-  },
-  label: {
-    fontSize: SIZES.large,
-    fontFamily: FONTS.bold.fontFamily,
-    fontWeight: FONTS.bold.fontWeight,
-    color: COLORS.white,
   },
 })
