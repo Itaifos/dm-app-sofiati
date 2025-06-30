@@ -16,6 +16,7 @@
     "@react-navigation/stack": "^7.3.2",
     "@rneui/themed": "^4.0.0-rc.8",
     "@supabase/supabase-js": "^2.49.10",
+    "axios": "^1.10.0",
     "expo": "~52.0.43",
     "expo-linear-gradient": "~14.0.2",
     "expo-status-bar": "~2.0.1",
