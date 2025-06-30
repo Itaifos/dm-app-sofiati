@@ -6,9 +6,9 @@ export const COLORS = {
     lightGray: "#B3B3B3",
   
     feliz: {
-      primary: "#FFD700",
+      primary: "#E6B800",
       secondary: "#FFA500",
-      background: "#FFD700",
+      background: "#E6B800",
     },
     triste: {
       primary: "#4169E1",
