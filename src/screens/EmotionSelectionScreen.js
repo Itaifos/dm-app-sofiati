@@ -6,7 +6,7 @@ import { EmotionButton } from "./Components/EmotionButton"
 import { SearchSongsButton } from "./Components/SearchSongsButton"
 import { LinearGradient } from "expo-linear-gradient"
 import { GradientOverlay } from "./Components/GradientOverlay"
-import { SIZES } from "../constants/Themes"
+import { FONTS, SIZES } from "../constants/Themes"
 import { useNavigation } from "@react-navigation/native"
 
 
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   Title: {
-    marginTop: 20,
+    marginTop: 80,
     alignItems: "center",
     marginVertical: 24,
   },
