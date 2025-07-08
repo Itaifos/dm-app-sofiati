@@ -13,13 +13,13 @@ function passesFilter(song, filter) {
 export function getSongsDataset(emotion) {
   const emotionFilter = getEmotion(emotion)
 
-  // Embaralhar e pegar 100 músicas aleatórias
+  
   const shuffled = fullDataset.sort(() => 0.5 - Math.random()).slice(0, 500)
 
-  // Aplicar filtro baseado na emoção
+  
   const filtered = shuffled.filter(song => passesFilter(song, emotionFilter))
 
-  // Pegar até 5 músicas
+  
   const selected = filtered.sort(() => 0.5 - Math.random()).slice(0, 5)
 
   return selected
