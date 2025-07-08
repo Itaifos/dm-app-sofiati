@@ -1,12 +1,13 @@
-import { View, FlatList, StyleSheet, Text, TouchableOpacity } from "react-native"
+import { useEffect, useState } from "react"
+import { View, FlatList, StyleSheet, Text, TouchableOpacity, Image } from "react-native"
 import { LinearGradient } from "expo-linear-gradient"
 import { ArrowLeft } from "lucide-react-native"
+import { useNavigation } from "@react-navigation/native"
 import { COLORS } from "../constants/Colors"
 import { SIZES, SPACING } from "../constants/Themes"
-import { GradientOverlay } from "../screens/Components/GradientOverlay"
-import { RefreshSongsButton } from "../screens/Components/RefreshSongsButton"
-import { CreatePlaylistButton } from "../screens/Components/CreatePlaylistButton"
-import { useNavigation } from "@react-navigation/native"
+import { GradientOverlay } from "./Components/GradientOverlay"
+import { RefreshSongsButton } from "./Components/RefreshSongsButton"
+import { getSongsDataset } from "../services/getSongsDataset"
 
 const RecommendationScreen = ({ route }) => {
   const selectedEmotion = route.params?.emotion || "feliz"
@@ -15,25 +16,27 @@ const RecommendationScreen = ({ route }) => {
 
   const navigation = useNavigation()
 
-  const recommendations = [
-    { id: "1", title: "Música 1", artist: "Artista 1", albumCover: "https://via.placeholder.com/300" },
-    { id: "2", title: "Música 2", artist: "Artista 2", albumCover: "https://via.placeholder.com/300" },
-    { id: "3", title: "Música 3", artist: "Artista 3", albumCover: "https://via.placeholder.com/300" },
-    { id: "4", title: "Música 4", artist: "Artista 3", albumCover: "https://via.placeholder.com/300" },
-    { id: "5", title: "Música 5", artist: "Artista 3", albumCover: "https://via.placeholder.com/300" },
-  ]
+  const [songs, setSongs] = useState([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    setLoading(true)
+    const result = getSongsDataset(selectedEmotion)
+    console.log("CHEGUEI AQUI")
+    console.log(result)
+    setSongs(result)
+    setLoading(false)
+  }, [selectedEmotion])
 
   const renderSongItem = ({ item }) => {
     return (
       <View style={styles.songItem}>
         <View style={styles.albumCoverPlaceholder} />
         <View style={styles.songInfo}>
-          <View>
-            <Text style={styles.songTitle}>{item.title}</Text>
-            <Text style={styles.artistName}>{item.artist}</Text>
-          </View>
+          <Text style={styles.songTitle}>{item.track_name}</Text>
+          <Text style={styles.artistName}>{item.artists}</Text>
         </View>
-    </View>
+      </View>
     )
   }
 
@@ -44,44 +47,42 @@ const RecommendationScreen = ({ route }) => {
       start={{ x: 0.0, y: 0.0 }}
       end={{ x: 1.0, y: 1.0 }}
     >
-      <GradientOverlay/>
+      <GradientOverlay />
 
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <ArrowLeft size={24} color={COLORS.white} />
         </TouchableOpacity>
-        
+
         <View style={styles.title}>
-          <Text style={styles.titleText}>Músicas para {selectedEmotion} </Text>
+          <Text style={styles.titleText}>Músicas para {selectedEmotion}</Text>
         </View>
       </View>
-      
+
       <FlatList
-        data={recommendations}
+        data={songs}
         renderItem={renderSongItem}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.track_id}
         contentContainerStyle={styles.listContent}
         showsVerticalScrollIndicator={false}
-        ListEmptyComponent={<Text style={styles.emptyText}>Nenhuma música encontrada.</Text>}
+        ListEmptyComponent={
+          <Text style={styles.emptyText}>
+            {loading ? "Carregando músicas..." : "Nenhuma música encontrada."}
+          </Text>
+        }
       />
 
       <View style={styles.ButtonArea}>
-        <CreatePlaylistButton
+        <RefreshSongsButton
           emotion={selectedEmotion}
           Onpress={() => {
-            console.log("cheguei aqqui")
+            setLoading(true)
+            const result = getSongsDataset(selectedEmotion)
+            setSongs(result)
+            setLoading(false)
           }}
         />
-        
-        <RefreshSongsButton 
-          emotion={selectedEmotion}
-          Onpress={() => {
-            console.log("cheguei aqqui")
-          }}
-        />
-
       </View>
-    
     </LinearGradient>
   )
 }
@@ -90,15 +91,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  listContent: {
-    padding: SPACING.medium,
-  },
   header: {
     flexDirection: "row",
     alignItems: "center",
     marginTop: 30,
-    marginLeft:20,
-    marginBottom: 40
+    marginLeft: 20,
+    marginBottom: 40,
   },
   title: {
     alignItems: "center",
@@ -109,7 +107,6 @@ const styles = StyleSheet.create({
     color: COLORS.white,
     textAlign: "center",
     fontWeight: "bold",
-    
   },
   listContent: {
     paddingHorizontal: SPACING.large,
@@ -142,12 +139,18 @@ const styles = StyleSheet.create({
     fontSize: SIZES.small,
     color: COLORS.lightGray,
   },
+  emptyText: {
+    textAlign: "center",
+    color: COLORS.lightGray,
+    marginTop: SPACING.large,
+  },
   ButtonArea: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "center",
-    gap: 10,
-    marginBottom: 90,
+    position: "absolute",
+    bottom: SPACING.xl,
+    left: 0,
+    right: 0,
+    alignItems: "center",
+    paddingHorizontal: SPACING.large,
   },
 })
 
