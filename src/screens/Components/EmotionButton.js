@@ -1,4 +1,3 @@
-// Components/EmotionButton.js
 import { TouchableOpacity, Text, StyleSheet, View } from "react-native"
 import { COLORS } from "../../constants/Colors"
 import {SIZES, SPACING } from "../../constants/Themes"

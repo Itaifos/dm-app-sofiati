@@ -1,4 +1,3 @@
-// src/util/spotify.js
 import axios from 'axios'
 import { encode as btoa } from 'base-64'
 import { SPOTIFY_CLIENTID, SPOTIFY_ANON_SECRET, SPOTIFY_REFRESH_TOKEN } from './keys'

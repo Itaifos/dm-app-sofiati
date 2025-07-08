@@ -1,4 +1,3 @@
-
 import { Text, TouchableOpacity, StyleSheet } from "react-native"
 import { FONTS, SIZES, SPACING } from "../../constants/Themes"
 import { COLORS } from "../../constants/Colors"
