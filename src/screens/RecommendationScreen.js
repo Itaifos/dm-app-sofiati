@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { View, FlatList, StyleSheet, Text, TouchableOpacity, Image } from "react-native"
+import { View, FlatList, StyleSheet, Text, TouchableOpacity, Image, Linking } from "react-native"
 import { LinearGradient } from "expo-linear-gradient"
 import { ArrowLeft } from "lucide-react-native"
 import { useNavigation } from "@react-navigation/native"
@@ -8,6 +8,7 @@ import { SIZES, SPACING } from "../constants/Themes"
 import { GradientOverlay } from "./Components/GradientOverlay"
 import { RefreshSongsButton } from "./Components/RefreshSongsButton"
 import { getSongsDataset } from "../services/getSongsDataset"
+import { getSongsSpotify } from "../services/getSongsSpotify"
 
 const RecommendationScreen = ({ route }) => {
   const selectedEmotion = route.params?.emotion || "feliz"
@@ -19,24 +20,54 @@ const RecommendationScreen = ({ route }) => {
   const [songs, setSongs] = useState([])
   const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
+  const openInSpotify = (trackId) => {
+    const url = `https://open.spotify.com/track/${trackId}`
+    Linking.openURL(url)
+  }
+
+  const loadAndEnrichSongs = async (emotion) => {
     setLoading(true)
-    const result = getSongsDataset(selectedEmotion)
-    console.log("CHEGUEI AQUI")
-    console.log(result)
-    setSongs(result)
-    setLoading(false)
+    try {
+      const rawSongs = getSongsDataset(emotion)
+      console.log(rawSongs)
+      console.log("CHEGUEI AQUI")
+      const enrichedSongs = await getSongsSpotify(rawSongs)
+      console.log(enrichedSongs)
+      console.log("CHEGUEI AQUI")
+      setSongs(enrichedSongs)
+    } catch (err) {
+      console.error("Erro ao carregar músicas:", err)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    loadAndEnrichSongs(selectedEmotion)
   }, [selectedEmotion])
+
 
   const renderSongItem = ({ item }) => {
     return (
-      <View style={styles.songItem}>
-        <View style={styles.albumCoverPlaceholder} />
-        <View style={styles.songInfo}>
-          <Text style={styles.songTitle}>{item.track_name}</Text>
-          <Text style={styles.artistName}>{item.artists}</Text>
+      <TouchableOpacity 
+        onPress={() => openInSpotify(item.track_id)}
+        activeOpacity={0.7}
+      >
+        <View style={styles.songItem}>
+          {item.image ? (
+            <Image 
+              source={{ uri: item.image }} 
+              style={styles.albumCover} 
+            />
+          ) : (
+            <View style={styles.albumCoverPlaceholder} />
+          )}
+          <View style={styles.songInfo}>
+            <Text style={styles.songTitle}>{item.track_name}</Text>
+            <Text style={styles.artistName}>{item.artists}</Text>
+          </View>
         </View>
-      </View>
+      </TouchableOpacity>
     )
   }
 
@@ -75,12 +106,7 @@ const RecommendationScreen = ({ route }) => {
       <View style={styles.ButtonArea}>
         <RefreshSongsButton
           emotion={selectedEmotion}
-          Onpress={() => {
-            setLoading(true)
-            const result = getSongsDataset(selectedEmotion)
-            setSongs(result)
-            setLoading(false)
-          }}
+          Onpress={() => loadAndEnrichSongs(selectedEmotion)}
         />
       </View>
     </LinearGradient>
@@ -125,6 +151,12 @@ const styles = StyleSheet.create({
     height: 48,
     borderRadius: 8,
     backgroundColor: COLORS.mediumGray,
+    marginRight: SPACING.medium,
+  },
+  albumCover: {
+    width: 48,
+    height: 48,
+    borderRadius: 8,
     marginRight: SPACING.medium,
   },
   songInfo: {
